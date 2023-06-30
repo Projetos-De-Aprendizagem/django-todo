@@ -6,7 +6,14 @@ from .models import Tarefa, Categoria
 def index(request):
     categorias = Categoria.objects.all()
     tarefas = Tarefa.objects.all()
-    contexto = {'categorias': categorias, 'tarefas': tarefas}
+    numero_tarefas_feitas = Tarefa.objects.filter(feito=True).count()
+    numero_tarefas_nao_feitas = Tarefa.objects.filter(feito=False).count()
+    contexto = {
+        'tarefas': tarefas, 
+        'categorias': categorias, 
+        'numero_tarefas_feitas': numero_tarefas_feitas, 
+        'numero_tarefas_nao_feitas': numero_tarefas_nao_feitas
+    }
     template = 'todo/main.html'
     return render(request, template, contexto)
 

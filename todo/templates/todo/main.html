@@ -6,11 +6,11 @@
             {% comment %} LEFT CONTAINER {% endcomment %}
             <div class="todo">
                 <h1 class="space">Items a fazer</h1>
-                <h1>123</h1>
+                <h1>{{ numero_tarefas_feitas }}</h1>
             </div>
             <div class="done">
                 <h1 class="space">Items feitos</h1>
-                <h1>123</h1>
+                <h1>{{ numero_tarefas_nao_feitas }}</h1>
             </div>
         </div>
         <div class="right-container">
@@ -33,6 +33,7 @@
                             <p class="list-paragraph">{{ tarefa.descricao }}</p>
                         </div>
                         <div class="icons">
+                            <a href="#"><i class="fa fa-check-square-o"></i></a>
                             <a href="#"><i class="fa fa-edit"></i></a>
                             <a href="#"><i class="fa fa-remove"></i></a>
                         </div>

@@ -123,9 +123,13 @@ ul.list{
     width: 100px;
 }
 
-.fa-edit, .fa-remove{
+.fa-edit, .fa-remove, .fa-check-square, .fa-check-square-o{
     font-size: 24px;
     color: #44475a;
+}
+
+.fa-check-square, .fa-check-square-o{
+    margin-right: 5px;
 }
 
 /*-------------------- FORM ----------------------------*/
