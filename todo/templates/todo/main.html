@@ -27,17 +27,19 @@
             <div class="list-container">
                 <ul class="list">
                     {% for tarefa in tarefas %}
-                    <li class="list-item">
-                        <div class="inner-text">
-                            <h3 class="list-item-title">{{ tarefa.nome }}</h3>
-                            <p class="list-paragraph">{{ tarefa.descricao }}</p>
-                        </div>
-                        <div class="icons">
-                            <a href="#"><i class="fa fa-check-square-o"></i></a>
-                            <a href="#"><i class="fa fa-edit"></i></a>
-                            <a href="#"><i class="fa fa-remove"></i></a>
-                        </div>
-                    </li>
+                        {% if tarefa.feito == False %}
+                            <li class="list-item">
+                                <div class="inner-text">
+                                    <h3 class="list-item-title">{{ tarefa.nome }}</h3>
+                                    <p class="list-paragraph">{{ tarefa.descricao }}</p>
+                                </div>
+                                <div class="icons">
+                                    <a href="{% url 'check_tarefa' tarefa.id %}"><i class="fa fa-check-square-o"></i></a>
+                                    <a href="#"><i class="fa fa-edit"></i></a>
+                                    <a href="#"><i class="fa fa-remove"></i></a>
+                                </div>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>

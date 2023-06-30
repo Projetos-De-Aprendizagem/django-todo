@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import TarefaForm
 from .models import Tarefa, Categoria
 
@@ -16,6 +16,13 @@ def index(request):
     }
     template = 'todo/main.html'
     return render(request, template, contexto)
+
+def check_tarefa(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+    # fazer a tarefa como feita.
+    tarefa.feito = True
+    tarefa.save()
+    return redirect('index')
 
 def create(request):
     if request.method == 'POST':
