@@ -4,7 +4,7 @@ from .models import Tarefa
 
 # Create your views here.
 def index(request):
-    template = 'base.html'
+    template = 'todo/main.html'
     return render(request, template)
 
 def create(request):

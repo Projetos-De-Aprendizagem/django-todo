@@ -1,6 +1,90 @@
-{% extends "base.html" %}
-
-
-{% block content %}
-    
+{% extends "base.html" %} {% block content %}
+    <div class="main-container">
+    <div class="left-container">
+        {% comment %} LEFT CONTAINER {% endcomment %}
+        <div class="todo">
+        <h1 class="space">Items a fazer</h1>
+        <h1>123</h1>
+        </div>
+        <div class="done">
+        <h1 class="space">Items feitos</h1>
+        <h1>123</h1>
+        </div>
+    </div>
+    <div class="right-container">
+        {% comment %} RIGHT CONTAINER {% endcomment %}
+        <div class="buttons">
+        <a href="{% url 'create' %}" class="button">Create a new task</a>
+        </div>
+        <div class="categories">
+        <h5 class="category-item">All</h5>
+        <h5 class="category-item">Priorities</h5>
+        <h5 class="category-item">Done</h5>
+        </div>
+        <div class="list-container">
+        <ul class="list">
+            <li class="list-item">
+            <div class="inner-text">
+                <h3 class="list-item-title">Title</h3>
+                <p class="list-paragraph">Lorem ipsum dolor some thing larara...</p>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fa fa-edit"></i></a>
+                <a href="#"><i class="fa fa-remove"></i></a>
+            </div>
+            </li>
+            <li class="list-item">
+            <div class="inner-text">
+                <h3 class="list-item-title">Title</h3>
+                <p class="list-paragraph">Lorem ipsum dolor some thing larara...</p>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fa fa-edit"></i></a>
+                <a href="#"><i class="fa fa-remove"></i></a>
+            </div>
+            </li>
+            <li class="list-item">
+            <div class="inner-text">
+                <h3 class="list-item-title">Title</h3>
+                <p class="list-paragraph">Lorem ipsum dolor some thing larara...</p>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fa fa-edit"></i></a>
+                <a href="#"><i class="fa fa-remove"></i></a>
+            </div>
+            </li>
+            <li class="list-item">
+            <div class="inner-text">
+                <h3 class="list-item-title">Title</h3>
+                <p class="list-paragraph">Lorem ipsum dolor some thing larara...</p>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fa fa-edit"></i></a>
+                <a href="#"><i class="fa fa-remove"></i></a>
+            </div>
+            </li>
+            <li class="list-item">
+            <div class="inner-text">
+                <h3 class="list-item-title">Title</h3>
+                <p class="list-paragraph">Lorem ipsum dolor some thing larara...</p>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fa fa-edit"></i></a>
+                <a href="#"><i class="fa fa-remove"></i></a>
+            </div>
+            </li>
+            <li class="list-item">
+            <div class="inner-text">
+                <h3 class="list-item-title">Title</h3>
+                <p class="list-paragraph">Lorem ipsum dolor some thing larara...</p>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fa fa-edit"></i></a>
+                <a href="#"><i class="fa fa-remove"></i></a>
+            </div>
+            </li>
+        </ul>
+        </div>
+    </div>
+    </div>
 {% endblock content %}
