@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import TarefaForm
-from .models import Tarefa
+from .models import Tarefa, Categoria
 
 # Create your views here.
 def index(request):
+    categorias = Categoria.objects.all()
+    tarefas = Tarefa.objects.all()
+    contexto = {'categorias': categorias, 'tarefas': tarefas}
     template = 'todo/main.html'
-    return render(request, template)
+    return render(request, template, contexto)
 
 def create(request):
     if request.method == 'POST':
