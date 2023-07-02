@@ -1,10 +1,16 @@
 from django.urls import path
-from .views import index, create, check_tarefa, delete_tarefa
-
+from .views import (
+    index, 
+    create_tarefa, 
+    check_tarefa, 
+    delete_tarefa, 
+    edit_tarefa
+)
 
 urlpatterns = [
     path('', index, name='index'),
-    path('create/', create, name='create'),
+    path('create-tarefa/', create_tarefa, name='create_tarefa'),
     path('check-tarefa/<int:tarefa_id>/', check_tarefa, name='check_tarefa'),
     path('delete-tarefa/<int:tarefa_id>/', delete_tarefa, name='delete_tarefa'),
+    path('edit-tarefa/<int:tarefa_id>/', edit_tarefa, name='edit_tarefa'),
 ]

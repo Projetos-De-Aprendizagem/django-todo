@@ -15,12 +15,6 @@ def index(request):
         'numero_tarefas_nao_feitas': numero_tarefas_nao_feitas
     }
     template = 'todo/main.html'
-    """
-    TODO: (nao add thios to github) <-----------------------------------
-    1. Fix form error messages not appearing..IMPORTANT
-    2. Work on the CRUD functionilities. 
-    3. display different categories on click...
-    """
     return render(request, template, contexto)
 
 def check_tarefa(request, tarefa_id):
@@ -30,7 +24,7 @@ def check_tarefa(request, tarefa_id):
     tarefa.save()
     return redirect('index')
 
-def create(request):
+def create_tarefa(request):
     if request.method == 'POST':
         form = TarefaForm(request.POST)
         if form.is_valid():
@@ -56,3 +50,20 @@ def delete_tarefa(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, id=tarefa_id)
     tarefa.delete()
     return redirect('index')
+
+def edit_tarefa(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+
+    if request.method == 'POST':
+        form = TarefaForm(request.POST, instance=tarefa)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = TarefaForm(instance=tarefa)
+
+    # added this variable to change form button.
+    edit = True
+    template = 'todo/form.html'
+    contexto = {'form': form, 'tarefa_id': tarefa_id, 'edit':edit}
+    return render(request, template, contexto)

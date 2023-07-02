@@ -16,7 +16,7 @@
         <div class="right-container">
             {% comment %} RIGHT CONTAINER {% endcomment %}
             <div class="buttons">
-                <a href="{% url 'create' %}" class="button">Create a new task</a>
+                <a href="{% url 'create_tarefa' %}" class="button">Create a new task</a>
             </div>
             <div class="categories">
                 <h5 class="category-item">All</h5>
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="icons">
                                     <a href="{% url 'check_tarefa' tarefa.id %}"><i class="fa fa-check-square-o"></i></a>
-                                    <a href="#"><i class="fa fa-edit"></i></a>
+                                    <a href="{% url 'edit_tarefa' tarefa.id %}"><i class="fa fa-edit"></i></a>
                                     <a href="{% url 'delete_tarefa' tarefa.id %}"><i class="fa fa-remove"></i></a>
                                 </div>
                             </li>
