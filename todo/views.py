@@ -33,6 +33,14 @@ def check_tarefa(request, tarefa_id):
     tarefa.save()
     return redirect('index')
 
+def uncheck_tarefa(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+    # deixar a tarefa como feita.
+    tarefa.feito = False
+    tarefa.save()
+    return redirect('index')
+
+
 def create_tarefa(request):
     if request.method == 'POST':
         form = TarefaForm(request.POST)

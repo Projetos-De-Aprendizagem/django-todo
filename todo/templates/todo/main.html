@@ -32,7 +32,11 @@
                                 <p class="list-paragraph">{{ tarefa.descricao }}</p>
                             </div>
                             <div class="icons">
-                                <a href="{% url 'check_tarefa' tarefa.id %}"><i class="fa fa-check-square-o"></i></a>
+                                {% if tarefa.feito == False %}
+                                    <a href="{% url 'check_tarefa' tarefa.id %}"><i class="fa fa-check-square-o"></i></a>
+                                {% else %}
+                                    <a href="{% url 'uncheck_tarefa' tarefa.id %}"><i class="fa fa-check-square"></i></a>
+                                {% endif %}
                                 <a href="{% url 'edit_tarefa' tarefa.id %}"><i class="fa fa-edit"></i></a>
                                 <a href="{% url 'delete_tarefa' tarefa.id %}"><i class="fa fa-remove"></i></a>
                             </div>
