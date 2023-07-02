@@ -111,6 +111,21 @@ ul.list{
     border-left-color: #ff5555;
 }
 
+/* had to add _other because there are other 
+   classes as todo and done. 
+*/
+.list-item.all_other {
+    border-left-color: #8be9fd;
+}
+
+.list-item.todo_other {
+    border-left-color: #ff5555;
+}
+
+.list-item.done_other {
+    border-left-color: #50fa7b;
+}
+
 .list-item-title, .list-paragraph {
     color: #282a36;
 }
@@ -187,3 +202,4 @@ button.send{
     margin-top: 5px;
     border: none;
 }
+

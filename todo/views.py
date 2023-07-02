@@ -3,23 +3,32 @@ from .forms import TarefaForm
 from .models import Tarefa, Categoria
 
 # Create your views here.
-def index(request):
+def index(request, category='all'):
     categorias = Categoria.objects.all()
     tarefas = Tarefa.objects.all()
+
     numero_tarefas_feitas = Tarefa.objects.filter(feito=True).count()
     numero_tarefas_nao_feitas = Tarefa.objects.filter(feito=False).count()
+
+    if category == 'done':
+        tarefas = tarefas.filter(feito=True)
+    elif category == 'todo':
+        tarefas = tarefas.filter(feito=False)
+
     contexto = {
-        'tarefas': tarefas, 
-        'categorias': categorias, 
-        'numero_tarefas_feitas': numero_tarefas_feitas, 
-        'numero_tarefas_nao_feitas': numero_tarefas_nao_feitas
+        'tarefas': tarefas,
+        'categorias': categorias,
+        'numero_tarefas_feitas': numero_tarefas_feitas,
+        'numero_tarefas_nao_feitas': numero_tarefas_nao_feitas,
+        'selected_category': category
     }
     template = 'todo/main.html'
     return render(request, template, contexto)
 
+
 def check_tarefa(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, id=tarefa_id)
-    # fazer a tarefa como feita.
+    # deixar a tarefa como feita.
     tarefa.feito = True
     tarefa.save()
     return redirect('index')

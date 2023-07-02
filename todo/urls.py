@@ -9,6 +9,7 @@ from .views import (
 
 urlpatterns = [
     path('', index, name='index'),
+    path('category/<str:category>/', index, name='index'),
     path('create-tarefa/', create_tarefa, name='create_tarefa'),
     path('check-tarefa/<int:tarefa_id>/', check_tarefa, name='check_tarefa'),
     path('delete-tarefa/<int:tarefa_id>/', delete_tarefa, name='delete_tarefa'),

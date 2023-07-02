@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="main-form">
-    <h1 class="title">Crie uma tarefa</h1>
+    <h1 class="title">{% if edit %} Editar tarefa {% else %} Crie uma tarefa {% endif %}</h1>
     <form class="form" action="{% if edit %}{% url 'edit_tarefa' tarefa_id %}{% else %}{% url 'create_tarefa' %}{% endif %}" method="POST">
         <div class="inputs"></div>
         {% csrf_token %}
