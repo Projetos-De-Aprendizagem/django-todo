@@ -51,3 +51,8 @@ def create(request):
     template = 'todo/form.html'
     contexto = {'form': form}
     return render(request, template, contexto)
+
+def delete_tarefa(request, tarefa_id):
+    tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+    tarefa.delete()
+    return redirect('index')

@@ -36,7 +36,7 @@
                                 <div class="icons">
                                     <a href="{% url 'check_tarefa' tarefa.id %}"><i class="fa fa-check-square-o"></i></a>
                                     <a href="#"><i class="fa fa-edit"></i></a>
-                                    <a href="#"><i class="fa fa-remove"></i></a>
+                                    <a href="{% url 'delete_tarefa' tarefa.id %}"><i class="fa fa-remove"></i></a>
                                 </div>
                             </li>
                         {% endif %}
