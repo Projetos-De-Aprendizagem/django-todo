@@ -5,7 +5,16 @@
     <h1 class="title">Crie uma tarefa</h1>
     <form class="form" action="{% url 'create' %}" method="POST">
         <div class="inputs"></div>
-        {% csrf_token %} {{ form }}
+        {% csrf_token %}
+        {% for field in form %}
+          <div>
+            {{ field.label_tag }}
+            {% if field.errors %}
+              <span>{{ field.errors }}</span>
+            {% endif %}
+            {{ field }}
+          </div>
+        {% endfor %}
         <button class="send">Create</button>
     </form>
     </div>

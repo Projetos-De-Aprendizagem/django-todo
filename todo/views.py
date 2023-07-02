@@ -15,6 +15,12 @@ def index(request):
         'numero_tarefas_nao_feitas': numero_tarefas_nao_feitas
     }
     template = 'todo/main.html'
+    """
+    TODO: (nao add thios to github) <-----------------------------------
+    1. Fix form error messages not appearing..IMPORTANT
+    2. Work on the CRUD functionilities. 
+    3. display different categories on click...
+    """
     return render(request, template, contexto)
 
 def check_tarefa(request, tarefa_id):
@@ -34,15 +40,14 @@ def create(request):
 
             tarefa = Tarefa(
                 nome=nome,
-                descricao=descricao, 
+                descricao=descricao,
                 categoria=categoria
             )
             tarefa.save()
             return redirect('index')
-        else:
-            print(form.errors)
     else:
-        template = 'todo/form.html'
-        tarefa_form = TarefaForm()
-        contexto = {'form': tarefa_form}
+        form = TarefaForm()
+
+    template = 'todo/form.html'
+    contexto = {'form': form}
     return render(request, template, contexto)
