@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="main-form">
+    <h1 class="title">{% if edit %} Editar tarefa {% else %} Crie uma tarefa {% endif %}</h1>
+    <form class="form" action="{% if edit %}{% url 'edit_tarefa' tarefa_id %}{% else %}{% url 'create_tarefa' %}{% endif %}" method="POST">
+        <div class="inputs"></div>
+        {% csrf_token %}
+        {% for field in form %}
+          <div>
+            {{ field.label_tag }}
+            {% if field.errors %}
+              <span>{{ field.errors }}</span>
+            {% endif %}
+            {{ field }}
+          </div>
+        {% endfor %}
+        <button class="send">
+            {% if edit %}
+                Edit
+            {% else %}
+                Create
+            {% endif %}
+        </button>
+    </form>
+    </div>
+{% endblock content %}

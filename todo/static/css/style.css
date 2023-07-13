@@ -68,11 +68,15 @@
 }
 
 .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 50px;
     width: 200px;
     border: none;
     background-color: deepskyblue;
     border-radius: 5px;
+    text-decoration: none;
 }
 
 .categories {
@@ -107,6 +111,21 @@ ul.list{
     border-left-color: #ff5555;
 }
 
+/* had to add _other because there are other 
+   classes as todo and done. 
+*/
+.list-item.all_other {
+    border-left-color: #8be9fd;
+}
+
+.list-item.todo_other {
+    border-left-color: #ff5555;
+}
+
+.list-item.done_other {
+    border-left-color: #50fa7b;
+}
+
 .list-item-title, .list-paragraph {
     color: #282a36;
 }
@@ -119,7 +138,68 @@ ul.list{
     width: 100px;
 }
 
-.fa-edit, .fa-remove{
+.fa-edit, .fa-remove, .fa-check-square, .fa-check-square-o{
     font-size: 24px;
     color: #44475a;
 }
+
+.fa-check-square, .fa-check-square-o{
+    margin-right: 5px;
+}
+
+/*-------------------- FORM ----------------------------*/
+
+.main-form{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #6272a4;
+}
+
+.title{
+    font-size: 60px;
+    margin: 20px 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 400px;
+    background-color: #44475a;
+    border-radius: 5px;
+}
+
+label {
+    display: none;
+    visibility: hidden;
+}
+
+.nome, .descricao, .categoria{
+    width: 300px;
+    height: 40px;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: #44475a;
+}
+
+option{
+    color: #44475a;  
+}
+
+button.send{
+    background-color: #50fa7b;
+    width: 310px;
+    height: 45px;
+    border-radius: 5px;
+    margin-top: 5px;
+    border: none;
+}
+

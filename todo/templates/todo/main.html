@@ -1,13 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-  {% block content %}
+{% extends "base.html" %} 
 
-  {% endblock content %}
-</body>
-</html>
+{% block content %}
+    <div class="main-container">
+        <div class="left-container">
+            {% comment %} LEFT CONTAINER {% endcomment %}
+            <div class="todo">
+                <h1 class="space">Items a fazer</h1>
+                <h1>{{ numero_tarefas_nao_feitas }}</h1>
+            </div>
+            <div class="done">
+                <h1 class="space">Items feitos</h1>
+                <h1>{{ numero_tarefas_feitas }}</h1>
+            </div>
+        </div>
+        <div class="right-container">
+            {% comment %} RIGHT CONTAINER {% endcomment %}
+            <div class="buttons">
+                <a href="{% url 'create_tarefa' %}" class="button">Create a new task</a>
+            </div>
+            <div class="categories">
+                <h5 class="category-item"><a href="{% url 'index' 'all' %}">All</a></h5>
+                <h5 class="category-item"><a href="{% url 'index' 'done' %}">Done</a></h5>
+                <h5 class="category-item"><a href="{% url 'index' 'todo' %}">Todo</a></h5>
+            </div>
+            <div class="list-container">
+                <ul class="list">
+                    {% for tarefa in tarefas %}
+                        <li class="list-item {{ selected_category }}_other">
+                            <div class="inner-text">
+                                <h3 class="list-item-title">{{ tarefa.nome }}</h3>
+                                <p class="list-paragraph">{{ tarefa.descricao }}</p>
+                            </div>
+                            <div class="icons">
+                                {% if tarefa.feito == False %}
+                                    <a href="{% url 'check_tarefa' tarefa.id %}"><i class="fa fa-check-square-o"></i></a>
+                                {% else %}
+                                    <a href="{% url 'uncheck_tarefa' tarefa.id %}"><i class="fa fa-check-square"></i></a>
+                                {% endif %}
+                                <a href="{% url 'edit_tarefa' tarefa.id %}"><i class="fa fa-edit"></i></a>
+                                <a href="{% url 'delete_tarefa' tarefa.id %}"><i class="fa fa-remove"></i></a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
