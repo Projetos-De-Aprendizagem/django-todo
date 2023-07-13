@@ -1,6 +1,9 @@
 from django import forms
 from .models import Tarefa, Categoria
 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
@@ -32,4 +35,27 @@ class TarefaForm(forms.ModelForm):
         if len(descricao) < 10:
             raise forms.ValidationError('A descrição deve ter no mínimo 10 caracteres')
         return descricao
-    
+
+
+class UserRegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'register_name', 'placeholder': 'Adicione um nome'}),
+            'email': forms.TextInput(attrs={'class': 'register_email', 'placeholder': 'Adicione um email'}),
+            'password1': forms.TextInput(attrs={'class': 'register_password', 'placeholder': 'Adicione um password'}),
+            'password2': forms.TextInput(attrs={'class': 'register_password', 'placeholder': 'Confirme o password'}),
+        }
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'login_username', 'placeholder': 'Username'})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'login_password', 'placeholder': 'Password'})
+    )
+
