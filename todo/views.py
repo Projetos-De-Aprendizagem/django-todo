@@ -5,6 +5,8 @@ from .models import Tarefa, Categoria
 # Create your views here.
 def index(request, category='all'):
     categorias = Categoria.objects.all()
+
+    # tarefa filtrada pelo usuario
     tarefas = Tarefa.objects.all()
 
     numero_tarefas_feitas = Tarefa.objects.filter(feito=True).count()
@@ -52,7 +54,9 @@ def create_tarefa(request):
             tarefa = Tarefa(
                 nome=nome,
                 descricao=descricao,
-                categoria=categoria
+                categoria=categoria,
+                # adicionado usuario automaticamente.
+                usuario=request.user
             )
             tarefa.save()
             return redirect('index')

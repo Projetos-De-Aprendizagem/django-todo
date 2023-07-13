@@ -15,10 +15,14 @@
 .left-container {
     display: flex;
     flex-direction: column;
-    padding: 50px;
+    padding: 20px 50px;
     width: 30%;
     height: 100%;
     background-color: #282a36;
+}
+
+.username-container {
+    height: 60px;
 }
 
 .todo{
@@ -51,6 +55,8 @@
 .space{
     margin-bottom: 10px;
 }
+
+
 
 /* ------------- RIGHT CONTAINER -------- */
 .right-container {
