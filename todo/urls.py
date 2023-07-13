@@ -5,11 +5,15 @@ from .views import (
     check_tarefa,
     uncheck_tarefa, 
     delete_tarefa, 
-    edit_tarefa
+    edit_tarefa,
+    login_view,
+    register_view
 )
 
 urlpatterns = [
     path('', index, name='index'),
+    path('login/', login_view, name='login'),
+    path('register/', register_view, name='register'),
     path('category/<str:category>/', index, name='index'),
     path('create-tarefa/', create_tarefa, name='create_tarefa'),
     path('check-tarefa/<int:tarefa_id>/', check_tarefa, name='check_tarefa'),

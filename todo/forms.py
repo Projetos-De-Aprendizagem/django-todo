@@ -38,18 +38,17 @@ class TarefaForm(forms.ModelForm):
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+
+    # precisa passar aqui pois UserCreationForm ja passa seus proprios widgets e so assim para sobrescrever.
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'register_email', 'placeholder': 'Adicione um email'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'register_name', 'placeholder': 'Adicione um nome'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'register_password', 'placeholder': 'Adicione um password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'register_password', 'placeholder': 'Confirme o password'}))
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'register_name', 'placeholder': 'Adicione um nome'}),
-            'email': forms.TextInput(attrs={'class': 'register_email', 'placeholder': 'Adicione um email'}),
-            'password1': forms.TextInput(attrs={'class': 'register_password', 'placeholder': 'Adicione um password'}),
-            'password2': forms.TextInput(attrs={'class': 'register_password', 'placeholder': 'Confirme o password'}),
-        }
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(

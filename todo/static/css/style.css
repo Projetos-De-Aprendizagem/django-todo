@@ -186,7 +186,8 @@ label {
     visibility: hidden;
 }
 
-.nome, .descricao, .categoria{
+.nome, .descricao, .categoria, .register_name, .register_email,
+.register_password, .login_username, .login_password{
     width: 300px;
     height: 40px;
     margin: 10px;

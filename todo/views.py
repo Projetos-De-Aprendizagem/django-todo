@@ -2,15 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import TarefaForm
 from .models import Tarefa, Categoria
 
+from .forms import UserRegistrationForm, LoginForm
+from django.contrib.auth import authenticate, login
+
 # Create your views here.
 def index(request, category='all'):
     categorias = Categoria.objects.all()
 
     # tarefa filtrada pelo usuario
-    tarefas = Tarefa.objects.all()
+    tarefas = Tarefa.objects.filter(usuario=request.user.id)
 
-    numero_tarefas_feitas = Tarefa.objects.filter(feito=True).count()
-    numero_tarefas_nao_feitas = Tarefa.objects.filter(feito=False).count()
+    numero_tarefas_feitas = Tarefa.objects.filter(feito=True, usuario=request.user).count()
+    numero_tarefas_nao_feitas = Tarefa.objects.filter(feito=False, usuario=request.user).count()
 
     if category == 'done':
         tarefas = tarefas.filter(feito=True)
@@ -87,4 +90,35 @@ def edit_tarefa(request, tarefa_id):
     edit = True
     template = 'todo/form.html'
     contexto = {'form': form, 'tarefa_id': tarefa_id, 'edit':edit}
+    return render(request, template, contexto)
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirect to the login page after successful registration
+    else:
+        form = UserRegistrationForm()
+    template = 'todo/auth_form.html'
+    contexto = {'form': form, 'view_name':'register'}
+    return render(request, template, contexto)
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')  # Redirect to the home page after successful login
+            else:
+                # Handle authentication error
+                form.add_error(None, 'Invalid username or password')
+    else:
+        form = LoginForm()
+    template = 'todo/auth_form.html'
+    contexto = {'form': form, 'view_name':'login'}
     return render(request, template, contexto)
