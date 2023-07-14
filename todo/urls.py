@@ -7,12 +7,14 @@ from .views import (
     delete_tarefa, 
     edit_tarefa,
     login_view,
+    logout_view,
     register_view
 )
 
 urlpatterns = [
     path('', index, name='index'),
     path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
     path('category/<str:category>/', index, name='index'),
     path('create-tarefa/', create_tarefa, name='create_tarefa'),

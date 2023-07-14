@@ -3,9 +3,12 @@ from .forms import TarefaForm
 from .models import Tarefa, Categoria
 
 from .forms import UserRegistrationForm, LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required
 def index(request, category='all'):
     categorias = Categoria.objects.all()
 
@@ -31,6 +34,7 @@ def index(request, category='all'):
     return render(request, template, contexto)
 
 
+@login_required
 def check_tarefa(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, id=tarefa_id)
     # deixar a tarefa como feita.
@@ -38,6 +42,8 @@ def check_tarefa(request, tarefa_id):
     tarefa.save()
     return redirect('index')
 
+
+@login_required
 def uncheck_tarefa(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, id=tarefa_id)
     # deixar a tarefa como feita.
@@ -46,6 +52,7 @@ def uncheck_tarefa(request, tarefa_id):
     return redirect('index')
 
 
+@login_required
 def create_tarefa(request):
     if request.method == 'POST':
         form = TarefaForm(request.POST)
@@ -70,11 +77,14 @@ def create_tarefa(request):
     contexto = {'form': form}
     return render(request, template, contexto)
 
+@login_required
 def delete_tarefa(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, id=tarefa_id)
     tarefa.delete()
     return redirect('index')
 
+
+@login_required
 def edit_tarefa(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, id=tarefa_id)
 
@@ -92,6 +102,7 @@ def edit_tarefa(request, tarefa_id):
     contexto = {'form': form, 'tarefa_id': tarefa_id, 'edit':edit}
     return render(request, template, contexto)
 
+
 def register_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -103,6 +114,7 @@ def register_view(request):
     template = 'todo/auth_form.html'
     contexto = {'form': form, 'view_name':'register'}
     return render(request, template, contexto)
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -122,3 +134,8 @@ def login_view(request):
     template = 'todo/auth_form.html'
     contexto = {'form': form, 'view_name':'login'}
     return render(request, template, contexto)
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('login')
